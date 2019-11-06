@@ -1,6 +1,6 @@
 class View {
 
-    constructor(elemento){
+    constructor(elemento) {
         this._elemento = elemento;
     }
 
