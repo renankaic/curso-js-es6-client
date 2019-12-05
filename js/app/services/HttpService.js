@@ -64,7 +64,7 @@ class HttpService {
                 }
 
             }
-            xhr.send(dado);
+            xhr.send(JSON.stringify(dado));
 
         });
 
