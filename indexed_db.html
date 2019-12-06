@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Aprendendo IndexedDB</title>
+</head>
+<body>
+    
+    <script>
+        let connection;
+        let openRequest = window.indexedDB.open('aluraframe', 1);
+        openRequest.onupgradeneeded = (event) => {
+
+            //Cria ou altera um banco já existente
+            let myConn = e.target.result;
+            myConn.createObjectStore('negociacoes');
+
+        };
+
+        openRequest.onsuccess = (event) => {
+
+            //Sempre será executado quando obter uma conexão
+            connection = event.target.result; //Uma instância de IDBDatabase
+
+        };
+
+        openRequest.onerror = (event) => {
+
+            //Erro ao executar a conexão com o banco
+            console.error(event.target.error);
+
+        };
+    </script>
+</body>
+</html>
