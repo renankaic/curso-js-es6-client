@@ -27,6 +27,10 @@ class NegociacaoController {
             .then(connection => new NegociacaoDao(connection)) //O "return" aqui é implícito
             .then(dao => dao.listaTodos()) //O "return" aqui é implícito. Retornará uma lista do metodo listaTodos()
             .then(negociacoes => negociacoes.forEach(negociacao => this._listaNegociacoes.adiciona(negociacao)))
+            .catch(erro => {
+                console.error(erro);
+                this._mensagem.texto = erro;
+            });
 
     }
 
