@@ -6,6 +6,16 @@ class NegociacaoService {
 
     }
 
+    obterNegociacoes() {
+
+        return Promise.all([
+            this.obterNegociacoesDaSemana(),
+            this.obterNegociacoesDaSemanaAnterior(),
+            this.obterNegociacoesDaSemanaRetrasada()
+        ]);
+
+    }
+
     obterNegociacoesDaSemana() {
 
         return new Promise((resolve, reject) => {
