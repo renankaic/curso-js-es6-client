@@ -6,6 +6,19 @@ class NegociacaoService {
 
     }
 
+    lista() {
+
+        return ConnectionFactory
+            .getConnection()
+            .then(connection => new NegociacaoDao(connection)) //O "return" aqui é implícito
+            .then(dao => dao.listaTodos()) //O "return" aqui é implícito. Retornará uma lista do metodo listaTodos()
+            .catch(erro => {
+                console.error(erro);
+                throw new Error("Não foi possível listar as Negociações");
+            });
+
+    }
+
     cadastra(negociacao) {
 
         return ConnectionFactory
@@ -13,9 +26,24 @@ class NegociacaoService {
             .then(connection => new NegociacaoDao(connection))
             .then(dao => dao.adiciona(negociacao))
             .then(() => "Negociação adicionada com sucesso!")
-            .catch(() => { 
+            .catch(erro => { 
+                console.error(error);
                 throw new Error("Não foi possível adicionar a negociação.")
             });
+
+    }
+
+    apagaTodos() {
+
+        return ConnectionFactory
+            .getConnection()
+            .then(connection => new NegociacaoDao(connection))
+            .then(dao => dao.apagaTodos())
+            .then(() => "Negociações apagadas com sucesso")
+            .catch(erro => {
+                console.error(erro);
+                throw new Error("Não foi possível apagar as Negociações");
+            })
 
     }
 

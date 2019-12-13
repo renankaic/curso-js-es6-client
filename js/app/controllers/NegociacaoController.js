@@ -20,18 +20,20 @@ class NegociacaoController {
             'texto'
         );
 
+        this._service = new NegociacaoService();
+
         this._init();
 
     }
 
     _init() {
 
-        ConnectionFactory
-            .getConnection()
-            .then(connection => new NegociacaoDao(connection)) //O "return" aqui é implícito
-            .then(dao => dao.listaTodos()) //O "return" aqui é implícito. Retornará uma lista do metodo listaTodos()
-            .then(negociacoes => negociacoes.forEach(negociacao => this._listaNegociacoes.adiciona(negociacao)))
-            .catch(erro => {
+        this._service
+            .lista()
+            .then(negociacoes => 
+                negociacoes.forEach(negociacao => 
+                    this._listaNegociacoes.adiciona(negociacao)))
+            .catch (erro => {
                 console.error(erro);
                 this._mensagem.texto = erro;
             });
@@ -47,7 +49,7 @@ class NegociacaoController {
         event.preventDefault();
 
         let negociacao = this._criaNegociacao();
-        new NegociacaoService()
+        this._service
             .cadastra(negociacao)
             .then(mensagem => {
                 this._listaNegociacoes.adiciona(negociacao);
@@ -60,8 +62,7 @@ class NegociacaoController {
 
     importaNegociacoes() {
 
-        let service = new NegociacaoService();
-        service
+        this._service
             .obterNegociacoes()
             .then(negociacoes => 
                 negociacoes
@@ -101,14 +102,13 @@ class NegociacaoController {
 
     apaga() {
 
-        ConnectionFactory
-            .getConnection()
-            .then(connection => new NegociacaoDao(connection))
-            .then(dao => dao.apagaTodos())
+        this._service
+            .apagaTodos()
             .then(mensagem => {
                 this._mensagem.texto = mensagem;
                 this._listaNegociacoes.esvazia();
-            });
+            })
+            .catch(erro => this._mensagem.texto = erro);
 
     }
 
