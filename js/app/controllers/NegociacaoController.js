@@ -1,11 +1,9 @@
 class NegociacaoController {
 
     constructor() {
-
-        this._ordemAtual = '';
-
         let $ = document.querySelector.bind(document);
-
+        
+        this._ordemAtual = '';
         this._inputData = $("#data");
         this._inputQuantidade = $("#quantidade");
         this._inputValor = $("#valor");
@@ -22,6 +20,12 @@ class NegociacaoController {
             'texto'
         );
 
+        this._init();
+
+    }
+
+    _init() {
+
         ConnectionFactory
             .getConnection()
             .then(connection => new NegociacaoDao(connection)) //O "return" aqui é implícito
@@ -31,6 +35,10 @@ class NegociacaoController {
                 console.error(erro);
                 this._mensagem.texto = erro;
             });
+
+        setInterval(() => {
+            this.importaNegociacoes();
+        }, 3000);
 
     }
 
