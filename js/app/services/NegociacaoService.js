@@ -55,8 +55,8 @@ class NegociacaoService {
                         negociacoes
                             .reduce((arrayAchatado, array) => arrayAchatado.concat(array), [])
                             .filter(negociacao =>
-                                !listaAtual.some(negociacaoExistente =>
-                                    JSON.stringify(negociacao) == JSON.stringify(negociacaoExistente)))
+                                !listaAtual.some(negociacaoExistente => negociacao.isEquals(negociacaoExistente)))
+                                    
                     )
                     .catch(error => {
                         console.error(error);
