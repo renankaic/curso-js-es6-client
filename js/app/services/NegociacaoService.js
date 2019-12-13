@@ -47,6 +47,24 @@ class NegociacaoService {
 
     }
 
+    importa(listaAtual) {
+
+        return  this
+                    .obterNegociacoes()
+                    .then(negociacoes =>
+                        negociacoes
+                            .reduce((arrayAchatado, array) => arrayAchatado.concat(array), [])
+                            .filter(negociacao =>
+                                !listaAtual.some(negociacaoExistente =>
+                                    JSON.stringify(negociacao) == JSON.stringify(negociacaoExistente)))
+                    )
+                    .catch(error => {
+                        console.error(error);
+                        throw new Error("Não foi possível buscar as negociações para importar");
+                    });
+
+    }
+
     obterNegociacoes() {
 
         return Promise.all([
