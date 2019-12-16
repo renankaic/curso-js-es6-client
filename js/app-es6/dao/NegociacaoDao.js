@@ -22,7 +22,7 @@ class NegociacaoDao {
 
             request.onerror = e => {
 
-                console.error(e.target.error)
+                console.log(e.target.error)
                 reject("Não foi possível adicionar a negociação");
                 
             };
@@ -64,7 +64,7 @@ class NegociacaoDao {
 
             cursor.onerror = e => {
 
-                console.error(e.target.error);
+                console.log(e.target.error);
                 reject("Não foi possível listar as Negociações");
 
             };
@@ -85,7 +85,7 @@ class NegociacaoDao {
             request.onsuccess = e => resolve("Negociações removidas com sucesso");
 
             request.onerror = e => { 
-                console.error(e.target.error);
+                console.log(e.target.error);
                 reject("Não foi possível remover as negociações");
             }
 

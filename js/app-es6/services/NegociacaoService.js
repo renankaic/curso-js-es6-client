@@ -13,7 +13,7 @@ class NegociacaoService {
             .then(connection => new NegociacaoDao(connection)) //O "return" aqui é implícito
             .then(dao => dao.listaTodos()) //O "return" aqui é implícito. Retornará uma lista do metodo listaTodos()
             .catch(erro => {
-                console.error(erro);
+                console.log(erro);
                 throw new Error("Não foi possível listar as Negociações");
             });
 
@@ -27,7 +27,7 @@ class NegociacaoService {
             .then(dao => dao.adiciona(negociacao))
             .then(() => "Negociação adicionada com sucesso!")
             .catch(erro => { 
-                console.error(error);
+                console.log(error);
                 throw new Error("Não foi possível adicionar a negociação.")
             });
 
@@ -41,7 +41,7 @@ class NegociacaoService {
             .then(dao => dao.apagaTodos())
             .then(() => "Negociações apagadas com sucesso")
             .catch(erro => {
-                console.error(erro);
+                console.log(erro);
                 throw new Error("Não foi possível apagar as Negociações");
             })
 
@@ -59,7 +59,7 @@ class NegociacaoService {
                                     
                     )
                     .catch(error => {
-                        console.error(error);
+                        console.log(error);
                         throw new Error("Não foi possível buscar as negociações para importar");
                     });
 
@@ -85,7 +85,7 @@ class NegociacaoService {
                     resolve( negociacoes.map(objeto => new Negociacao(new Date(objeto.data), objeto.quantidade, objeto.valor)) )
                 })
                 .catch(error => {
-                    console.error(error);
+                    console.log(error);
                     reject("Não foi possível obter as negociações da Semana");
                 });
 
@@ -103,7 +103,7 @@ class NegociacaoService {
                     resolve(negociacoes.map(objeto => new Negociacao(new Date(objeto.data), objeto.quantidade, objeto.valor)))
                 })
                 .catch(error => {
-                    console.error(error);
+                    console.log(error);
                     reject("Não foi possível obter as negociações da Semana");
                 });
 
@@ -121,7 +121,7 @@ class NegociacaoService {
                     resolve(negociacoes.map(objeto => new Negociacao(new Date(objeto.data), objeto.quantidade, objeto.valor)))
                 })
                 .catch(error => {
-                    console.error(error);
+                    console.log(error);
                     reject("Não foi possível obter as negociações da Semana");
                 });
 

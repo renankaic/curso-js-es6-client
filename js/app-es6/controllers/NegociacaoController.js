@@ -34,7 +34,7 @@ class NegociacaoController {
                 negociacoes.forEach(negociacao => 
                     this._listaNegociacoes.adiciona(negociacao)))
             .catch (erro => {
-                console.error(erro);
+                console.log(erro);
                 this._mensagem.texto = erro;
             });
 

@@ -39,7 +39,7 @@ var ConnectionFactory = (function() {
 
                 openRequest.onerror = e => {
 
-                    console.error(e.target.error);
+                    console.log(e.target.error);
                     reject(e.target.error.name);
 
                 };
